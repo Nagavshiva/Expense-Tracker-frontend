@@ -29,17 +29,17 @@ const Navbar = () => {
      
         <Typography
           variant="h6"
-           component={Link} // Make the title a clickable link
+           component={Link} 
           to="/"
           sx={{
             flexGrow: 1,
             textAlign: {
-              xs: "center", // Small devices
-              sm: "left", // Medium and larger devices
+              xs: "center", 
+              sm: "left", 
             },
             marginBottom: {
-              xs: 1, // Adds margin at the bottom for small devices
-              sm: 0, // No margin for medium and larger devices
+              xs: 1, 
+              sm: 0, 
             },
             textDecoration: "none", 
             color: "inherit", 
@@ -60,7 +60,7 @@ const Navbar = () => {
           aria-label="menu"
           onClick={toggleMenu}
           sx={{
-            display: { xs: "block", sm: "none" }, // Show only on small devices
+            display: { xs: "block", sm: "none" }, 
           }}
         >
           <MenuIcon />
@@ -69,7 +69,7 @@ const Navbar = () => {
         {/* Right-side Items for Medium and Larger Devices */}
         <Box
           sx={{
-            display: { xs: "none", sm: "flex" }, // Hide on small devices
+            display: { xs: "none", sm: "flex" }, 
             flexDirection: "row",
             alignItems: "center",
           }}

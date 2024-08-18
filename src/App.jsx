@@ -6,7 +6,7 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import PrivateRoute from './components/Layout/PrivateRoute';
 import Expenses from './pages/Expenses';
-import Placeholder from './components/Layout/Placeholder'; // Import Placeholder
+import Placeholder from './components/Layout/Placeholder'; 
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           <Route path="/expensesChart" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Placeholder />} /> {/* Handle unknown routes */}
+          <Route path="*" element={<Placeholder />} /> 
         </Routes>
       </Router>
     </>

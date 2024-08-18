@@ -58,8 +58,8 @@ const AddExpense = ({ onAdd, selectedExpense }) => {
         variant="h6"
         gutterBottom
         sx={{
-          textAlign: { xs: 'center', sm: 'left' }, // Center text on small devices
-          fontSize: { xs: '1.25rem', sm: '1.5rem' }, // Font size adjustment
+          textAlign: { xs: 'center', sm: 'left' }, 
+          fontSize: { xs: '1.25rem', sm: '1.5rem' }, 
         }}
       >
         {selectedExpense ? 'Edit Expense' : 'Add Expense'}
@@ -76,7 +76,7 @@ const AddExpense = ({ onAdd, selectedExpense }) => {
           onChange={handleChange}
           required
           sx={{
-            fontSize: { xs: '0.875rem', sm: '1rem' }, // Font size adjustment for small devices
+            fontSize: { xs: '0.875rem', sm: '1rem' },
           }}
         />
         <TextField
@@ -90,7 +90,7 @@ const AddExpense = ({ onAdd, selectedExpense }) => {
           onChange={handleChange}
           required
           sx={{
-            fontSize: { xs: '0.875rem', sm: '1rem' }, // Font size adjustment for small devices
+            fontSize: { xs: '0.875rem', sm: '1rem' }, 
           }}
         >
           <MenuItem value="Food">Food</MenuItem>
@@ -110,7 +110,7 @@ const AddExpense = ({ onAdd, selectedExpense }) => {
           InputLabelProps={{ shrink: true }}
           required
           sx={{
-            fontSize: { xs: '0.875rem', sm: '1rem' }, // Font size adjustment for small devices
+            fontSize: { xs: '0.875rem', sm: '1rem' }, 
           }}
         />
         <TextField
@@ -122,7 +122,7 @@ const AddExpense = ({ onAdd, selectedExpense }) => {
           value={formData.description}
           onChange={handleChange}
           sx={{
-            fontSize: { xs: '0.875rem', sm: '1rem' }, // Font size adjustment for small devices
+            fontSize: { xs: '0.875rem', sm: '1rem' }, 
           }}
         />
         <Button
@@ -131,7 +131,7 @@ const AddExpense = ({ onAdd, selectedExpense }) => {
           color="primary"
           fullWidth
           sx={{
-            fontSize: { xs: '0.875rem', sm: '1rem' }, // Font size adjustment for small devices
+            fontSize: { xs: '0.875rem', sm: '1rem' }, 
           }}
         >
           {selectedExpense ? 'Update Expense' : 'Add Expense'}
@@ -145,7 +145,7 @@ AddExpense.propTypes = {
   onAdd: PropTypes.func.isRequired,
   selectedExpense: PropTypes.shape({
     _id: PropTypes.string,
-    amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // Allow number or string
+    amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), 
     category: PropTypes.string,
     date: PropTypes.string,
     description: PropTypes.string,

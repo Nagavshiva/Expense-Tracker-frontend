@@ -71,8 +71,8 @@ const Expenses = () => {
         onChange={handleCategoryChange}
         sx={{
           pl: 1,
-          mb: 2, // Add some margin at the bottom
-          width: { xs: '100%', sm: '30%' }, // Full width on small devices, 30% on medium and above
+          mb: 2, 
+          width: { xs: '100%', sm: '30%' }, 
         }}
       >
         <MenuItem value="">All</MenuItem>
@@ -88,10 +88,9 @@ const Expenses = () => {
   onClick={handleOpen}
   sx={{
     position: 'fixed',
-    top: { xs: 60, sm: 70 },  // Position it at the top based on device size
-    right: { xs: 10, sm: 20 }, // Adjust the right position to avoid left-side interference
-    zIndex: 1000, // Ensure it's above other content
-    fontSize: { xs: '0.75rem', sm: '1rem' }, // Font size adjustment for small devices
+    top: { xs: 60, sm: 70 },  
+    right: { xs: 10, sm: 20 }, 
+    fontSize: { xs: '0.75rem', sm: '1rem' },
   }}
 >
   Add Expense
@@ -105,7 +104,7 @@ const Expenses = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: { xs: '90%', sm: 400 }, // Width adjustment for small and medium devices
+            width: { xs: '90%', sm: 400 }, 
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
@@ -123,9 +122,9 @@ const Expenses = () => {
 
       <ExpenseList
         expenses={expenses}
-        selectedCategory={selectedCategory} // Pass the selected category to ExpenseList
+        selectedCategory={selectedCategory} 
         onDelete={handleDeleteExpense}
-        onEdit={handleEditExpense} // Pass the handleEditExpense function
+        onEdit={handleEditExpense} 
       />
     </div>
   );

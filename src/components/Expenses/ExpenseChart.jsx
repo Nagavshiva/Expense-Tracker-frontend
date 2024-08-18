@@ -39,12 +39,12 @@ const ExpenseChart = ({ expenses }) => {
       <Box
         sx={{
           maxWidth: {
-            xs: '100%', // full width on extra-small devices
-            sm: '80%',  // 80% width on small devices
-            md: '60%',  // 60% width on medium devices
-            lg: '50%',  // 50% width on large devices
+            xs: '100%', 
+            sm: '80%',  
+            md: '60%',  
+            lg: '50%',  
           },
-          margin: '0 auto', // Center the chart horizontally
+          margin: '0 auto', 
         }}
       >
         <Pie data={data} />

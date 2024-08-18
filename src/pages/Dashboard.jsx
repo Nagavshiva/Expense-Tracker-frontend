@@ -23,24 +23,24 @@ const Dashboard = () => {
     <Container
       sx={{
         padding: {
-          xs: 2, // Padding for extra-small devices
-          sm: 3, // Padding for small devices
-          md: 4, // Padding for medium devices
-          lg: 5, // Padding for large devices
+          xs: 2, 
+          sm: 3, 
+          md: 4, 
+          lg: 5, 
         },
-        maxWidth: 'lg', // Maximum width to limit container on large screens
+        maxWidth: 'lg', 
       }}
     >
       <Box
         sx={{
           textAlign: {
-            xs: 'center', // Center text on small devices
-            sm: 'left', // Left align on medium and larger devices
+            xs: 'center', 
+            sm: 'left', 
           },
           marginBottom: {
-            xs: 2, // Margin bottom for extra-small devices
-            sm: 3, // Margin bottom for small devices
-            md: 4, // Margin bottom for medium devices
+            xs: 2, 
+            sm: 3, 
+            md: 4, 
           },
         }}
       >
@@ -49,10 +49,10 @@ const Dashboard = () => {
           gutterBottom
           sx={{
             fontSize: {
-              xs: '1.5rem', // Font size for extra-small devices
-              sm: '2rem', // Font size for small devices
-              md: '2.5rem', // Font size for medium devices
-              lg: '3rem', // Font size for large devices
+              xs: '1.5rem', 
+              sm: '2rem', 
+              md: '2.5rem', 
+              lg: '3rem', 
             },
           }}
         >

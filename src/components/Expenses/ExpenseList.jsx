@@ -12,9 +12,9 @@ const ExpenseList = ({ expenses, onDelete, onEdit, selectedCategory }) => {
     <Container
       sx={{
         padding: {
-          xs: 1, // Padding for small devices
-          sm: 2, // Padding for medium devices
-          md: 3, // Padding for large devices
+          xs: 1, 
+          sm: 2,
+          md: 3, 
         },
       }}
     >
@@ -23,13 +23,13 @@ const ExpenseList = ({ expenses, onDelete, onEdit, selectedCategory }) => {
         gutterBottom
         sx={{
           textAlign: {
-            xs: 'center', // Center align for small devices
-            sm: 'left', // Left align for medium and larger devices
+            xs: 'center', 
+            sm: 'left', 
           },
           fontSize: {
-            xs: '1.25rem', // Smaller font size for small devices
-            sm: '1.5rem',  // Medium font size for medium devices
-            md: '1.75rem', // Larger font size for large devices
+            xs: '1.25rem', 
+            sm: '1.5rem',  
+            md: '1.75rem', 
           },
         }}
       >
@@ -38,20 +38,20 @@ const ExpenseList = ({ expenses, onDelete, onEdit, selectedCategory }) => {
       <Table
         sx={{
           minWidth: {
-            xs: 300, // Minimum width for small devices
-            sm: 500, // Minimum width for medium devices
-            md: 700, // Minimum width for large devices
+            xs: 300, 
+            sm: 500, 
+            md: 700, 
           },
           '& th, & td': {
             padding: {
-              xs: 0.5, // Smaller padding for small devices
-              sm: 1,   // Medium padding for medium devices
-              md: 1.5, // Larger padding for large devices
+              xs: 0.5, 
+              sm: 1,   
+              md: 1.5,
             },
             fontSize: {
-              xs: '0.75rem', // Smaller font size for small devices
-              sm: '0.875rem', // Medium font size for medium devices
-              md: '1rem', // Larger font size for large devices
+              xs: '0.75rem', 
+              sm: '0.875rem', 
+              md: '1rem', 
             },
           },
         }}
@@ -78,14 +78,14 @@ const ExpenseList = ({ expenses, onDelete, onEdit, selectedCategory }) => {
                   onClick={() => onEdit(expense)} // Trigger edit mode
                   sx={{
                     fontSize: {
-                      xs: '0.7rem', // Smaller icon size for small devices
-                      sm: '0.875rem', // Medium icon size for medium devices
-                      md: '1rem', // Larger icon size for large devices
+                      xs: '0.7rem', 
+                      sm: '0.875rem', 
+                      md: '1rem', 
                     },
                     padding: {
-                      xs: 0.5, // Smaller padding for small devices
-                      sm: 1,   // Medium padding for medium devices
-                      md: 1.5, // Larger padding for large devices
+                      xs: 0.5, 
+                      sm: 1,   
+                      md: 1.5, 
                     },
                   }}
                 >
@@ -96,14 +96,14 @@ const ExpenseList = ({ expenses, onDelete, onEdit, selectedCategory }) => {
                   onClick={() => onDelete(expense._id)}
                   sx={{
                     fontSize: {
-                      xs: '0.7rem', // Smaller icon size for small devices
-                      sm: '0.875rem', // Medium icon size for medium devices
-                      md: '1rem', // Larger icon size for large devices
+                      xs: '0.7rem', 
+                      sm: '0.875rem', 
+                      md: '1rem', 
                     },
                     padding: {
-                      xs: 0.5, // Smaller padding for small devices
-                      sm: 1,   // Medium padding for medium devices
-                      md: 1.5, // Larger padding for large devices
+                      xs: 0.5, 
+                      sm: 1,  
+                      md: 1.5, 
                     },
                     marginLeft: '0.5rem',
                   }}
@@ -131,7 +131,7 @@ ExpenseList.propTypes = {
   ).isRequired,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-  selectedCategory: PropTypes.string.isRequired, // Add prop type for selectedCategory
+  selectedCategory: PropTypes.string.isRequired, 
 };
 
 export default ExpenseList;
