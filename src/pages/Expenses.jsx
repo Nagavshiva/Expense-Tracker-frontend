@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IconButton, Button, Modal, Box, TextField, MenuItem } from '@mui/material';
+import { IconButton, Button, Modal, Box, TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import AddExpense from '../components/Expenses/AddExpense';
 import ExpenseList from '../components/Expenses/ExpenseList';
 import axios from '../services/api';
@@ -8,8 +8,9 @@ import CloseIcon from '@mui/icons-material/Close';
 const Expenses = () => {
   const [expenses, setExpenses] = useState([]);
   const [open, setOpen] = useState(false);
-  const [selectedExpense, setSelectedExpense] = useState(null); // State to hold the expense being edited
-  const [selectedCategory, setSelectedCategory] = useState(''); // State to hold the selected category for filtering
+  const [selectedExpense, setSelectedExpense] = useState(null); 
+  const [selectedCategory, setSelectedCategory] = useState(''); 
+  const [sortCriteria, setSortCriteria] = useState('date'); 
 
   useEffect(() => {
     const fetchExpenses = async () => {
@@ -61,41 +62,111 @@ const Expenses = () => {
     setSelectedCategory(e.target.value);
   };
 
+  const handleSortChange = (e) => {
+    setSortCriteria(e.target.value);
+  };
+
+  const exportCSV = () => {
+    const csvRows = [];
+    const headers = ['Date', 'Category', 'Amount', 'Description'];
+    csvRows.push(headers.join(',')); // Add headers to the CSV
+
+    // Loop through expenses and create rows for each expense
+    expenses.forEach((expense) => {
+      const row = [
+        new Date(expense.date).toLocaleDateString(),
+        expense.category,
+        expense.amount,
+        expense.description || '', // Handle empty description
+      ];
+      csvRows.push(row.join(',')); // Add rows to the CSV
+    });
+
+    const csvString = csvRows.join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'expenses.csv');
+    a.click();
+  };
+
+  // Sort expenses based on the selected criteria
+  const sortedExpenses = [...expenses].sort((a, b) => {
+    if (sortCriteria === 'date') {
+      return new Date(b.date) - new Date(a.date);
+    } else if (sortCriteria === 'amount') {
+      return b.amount - a.amount;
+    } else if (sortCriteria === 'category') {
+      return a.category.localeCompare(b.category);
+    }
+    return 0;
+  });
+
   return (
-    <div style={{ marginTop: '5rem', position: 'relative' }}>
-      <TextField
-        label="Filter by Category"
-        select
-        variant="outlined"
-        value={selectedCategory}
-        onChange={handleCategoryChange}
+    <div style={{ marginTop: '5rem' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+        <TextField
+          label="Filter by Category"
+          select
+          variant="outlined"
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          sx={{
+            width: { xs: '100%', sm: '30%' }, 
+          }}
+        >
+          <MenuItem value="">All</MenuItem>
+          <MenuItem value="Food">Food</MenuItem>
+          <MenuItem value="Transport">Transport</MenuItem>
+          <MenuItem value="Entertainment">Entertainment</MenuItem>
+          <MenuItem value="Other">Other</MenuItem>
+        </TextField>
+
+        <FormControl sx={{ width: { xs: '100%', sm: '30%' } }}>
+          <InputLabel>Sort by</InputLabel>
+          <Select
+            value={sortCriteria}
+            onChange={handleSortChange}
+            label="Sort by"
+          >
+            <MenuItem value="date">Date</MenuItem>
+            <MenuItem value="amount">Amount</MenuItem>
+            <MenuItem value="category">Category</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+
+      <Box
         sx={{
-          pl: 1,
-          mb: 2, 
-          width: { xs: '100%', sm: '30%' }, 
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 2,
         }}
       >
-        <MenuItem value="">All</MenuItem>
-        <MenuItem value="Food">Food</MenuItem>
-        <MenuItem value="Transport">Transport</MenuItem>
-        <MenuItem value="Entertainment">Entertainment</MenuItem>
-        <MenuItem value="Other">Other</MenuItem>
-      </TextField>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleOpen}
+          sx={{
+            fontSize: { xs: '0.75rem', sm: '1rem' },
+          }}
+        >
+          Add Expense
+        </Button>
 
-      <Button
-  variant="contained"
-  color="primary"
-  onClick={handleOpen}
-  sx={{
-    position: 'fixed',
-    top: { xs: 60, sm: 70 },  
-    right: { xs: 10, sm: 20 }, 
-    fontSize: { xs: '0.75rem', sm: '1rem' },
-  }}
->
-  Add Expense
-</Button>
-
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={exportCSV}
+          sx={{
+            fontSize: { xs: '0.75rem', sm: '1rem' },
+          }}
+        >
+          Export CSV
+        </Button>
+      </Box>
 
       <Modal open={open} onClose={handleClose}>
         <Box
@@ -121,10 +192,10 @@ const Expenses = () => {
       </Modal>
 
       <ExpenseList
-        expenses={expenses}
-        selectedCategory={selectedCategory} 
+        expenses={sortedExpenses}
+        selectedCategory={selectedCategory} // Pass the selected category to ExpenseList
         onDelete={handleDeleteExpense}
-        onEdit={handleEditExpense} 
+        onEdit={handleEditExpense} // Pass the handleEditExpense function
       />
     </div>
   );
