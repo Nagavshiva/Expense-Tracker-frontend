@@ -114,6 +114,7 @@ const Expenses = () => {
           onChange={handleCategoryChange}
           sx={{
             width: { xs: '100%', sm: '30%' }, 
+            ml:2
           }}
         >
           <MenuItem value="">All</MenuItem>
@@ -123,7 +124,7 @@ const Expenses = () => {
           <MenuItem value="Other">Other</MenuItem>
         </TextField>
 
-        <FormControl sx={{ width: { xs: '100%', sm: '30%' } }}>
+        <FormControl sx={{ width: { xs: '100%', sm: '30%' },pr:2 }}>
           <InputLabel>Sort by</InputLabel>
           <Select
             value={sortCriteria}
@@ -151,6 +152,7 @@ const Expenses = () => {
           onClick={handleOpen}
           sx={{
             fontSize: { xs: '0.75rem', sm: '1rem' },
+            ml:2
           }}
         >
           Add Expense
@@ -162,6 +164,7 @@ const Expenses = () => {
           onClick={exportCSV}
           sx={{
             fontSize: { xs: '0.75rem', sm: '1rem' },
+            mr:2
           }}
         >
           Export CSV

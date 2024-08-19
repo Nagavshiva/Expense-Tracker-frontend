@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, Button, Container, Typography, Link as MuiLink } from '@mui/material';
+import { TextField, Button, Container, Typography, Link as MuiLink, Snackbar, Alert } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from '../../services/api';
 
@@ -8,6 +8,10 @@ const Login = () => {
     email: '',
     password: '',
   });
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // 'success', 'error', 'warning', 'info'
 
   const navigate = useNavigate();
 
@@ -23,10 +27,21 @@ const Login = () => {
     try {
       const { data } = await axios.post('/auth/login', formData);
       localStorage.setItem('authToken', data.token);
-      navigate('/');
+      setSnackbarSeverity('success');
+      setSnackbarMessage('Login successful! Redirecting...');
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 2000); // Delay to show the snackbar before redirecting
     } catch (error) {
-      console.error('Login failed:', error.response.data.message);
+      setSnackbarSeverity('error');
+      setSnackbarMessage(error.response?.data?.message || 'Login failed!');
+      setSnackbarOpen(true);
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   return (
@@ -57,11 +72,22 @@ const Login = () => {
         <Button type="submit" variant="contained" color="primary" fullWidth>Login</Button>
       </form>
       <Typography align="center" sx={{ mt: 2 }}>
-   Don&apos;t have an account?
+        Don&apos;t have an account?{' '}
         <MuiLink component={Link} to="/register" color="primary">
           Register here
         </MuiLink>
       </Typography>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

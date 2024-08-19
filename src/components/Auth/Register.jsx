@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, Button, Container, Typography, Link as MuiLink } from '@mui/material';
+import { TextField, Button, Container, Typography, Link as MuiLink, Snackbar, Alert } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from '../../services/api';
 
@@ -9,6 +9,10 @@ const Register = () => {
     email: '',
     password: '',
   });
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // 'success', 'error', 'warning', 'info'
 
   const navigate = useNavigate();
 
@@ -24,10 +28,21 @@ const Register = () => {
     try {
       const { data } = await axios.post('/auth/register', formData);
       localStorage.setItem('authToken', data.token);
-      navigate('/');
+      setSnackbarSeverity('success');
+      setSnackbarMessage('Registration successful! Redirecting...');
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 2000); // Delay to show the snackbar before redirecting
     } catch (error) {
-      console.error('Registration failed:', error.response.data.message);
+      setSnackbarSeverity('error');
+      setSnackbarMessage(error.response?.data?.message || 'Registration failed!');
+      setSnackbarOpen(true);
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   return (
@@ -73,6 +88,17 @@ const Register = () => {
           Login here
         </MuiLink>
       </Typography>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
